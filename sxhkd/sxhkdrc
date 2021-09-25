@@ -1,0 +1,78 @@
+#Term
+super + Return
+    kitty
+super + shift + Return
+    xterm
+
+#dmenu
+super + d
+    dmenu_run
+
+#firefox
+super + c
+    firefox
+
+#fm
+super + s
+    pcmanfm
+
+#Close and Kill
+super + shift + q
+    bspc node -{c,k}
+
+#Kill xorg
+super + Escape
+    killall xinit
+
+#fullscreen
+super + f
+    bspc node -t ~fullscreen
+# focus the node in the given direction
+super + {_,shift + }{h,j,k,l}
+	bspc node -{f,s} {west,south,north,east}
+# Same thing with arrow keys
+super + {_,shift + }{Left,Down,Up,Right}
+    bspc node -{f,s} {west,south,north,east}
+
+# focus the node for the given path jump
+super + {p,b,comma,period}
+	bspc node -f @{parent,brother,first,second}
+
+# focus the next/previous window in the current desktop
+super + {_,shift + }c
+	bspc node -f {next,prev}.local.!hidden.window
+
+# expand a window by moving one of its side outward
+super + alt + {h,j,k,l}
+    bspc node @{west -r -10,south -r +10,north -r -10,east -r +10}
+
+# contract a window by moving one of its side inward
+super + alt + shift + {h,j,k,l}
+    bspc node @{east -r -10,north -r +10,south -r -10,west -r +10}
+
+# expand a window by moving one of its side outward
+super + shift + {Left,Down,Up,Right}
+    bspc node @{west -r -10,south -r +10,north -r -10,east -r +10}
+
+# contract a window by moving one of its side inward
+super + alt + shift + {Left,Down,Up,Right}
+    bspc node @{east -r -10,north -r +10,south -r -10,west -r +10}
+
+# Move desktop to other monitor
+super + shift + Tab
+    bspc desktop focused -m next --follow
+
+# Move window to other monitor
+super + Tab
+    bspc node -m next --follow
+
+# swap the current node and the biggest window
+super + b
+	bspc node -s biggest.window
+
+#mouse scroll through desktops
+super + @button{4,5}
+    bspc desktop -f {prev,next}
+# focus or send to the given desktop
+super + {_,shift + }{1-9,0}
+	bspc {desktop -f,node -d} '^{1-9,10}'
