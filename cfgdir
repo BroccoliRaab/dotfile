@@ -1,0 +1,3 @@
+bspwm /home/robert/.config/bspwm/bspwmrc
+sxhkd /home/robert/.config/sxhkd/sxhkdrc
+lemonbar /home/robert/.config/lembonbar/bar.sh
