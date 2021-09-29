@@ -16,9 +16,18 @@ super + c
 super + s
     pcmanfm
 
+#pavu
+super + p
+    bspc rule -a \* -o state=floating && pavucontrol
+
 #Close and Kill
 super + shift + q
     bspc node -{c,k}
+
+#restart sxhkd
+super + alt + s
+    pkill sxhkd && sxhkd
+    
 
 #Kill xorg
 super + Escape
