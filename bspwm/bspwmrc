@@ -1,5 +1,5 @@
 #!/bin/sh
 pgrep -x sxhkd > /dev/null || sxhkd &
-~/.config/lembonbar/bar.sh & 
+~/.config/lemonbar/bar.sh & 
 bspc monitor DP-1 -d 1 2 3 4 5 6 7 8 9 10
 bspc monitor DP-2 -d 1 2 3 4 5 6 7 8 9 10
