@@ -1,3 +1,4 @@
 bspwm /home/robert/.config/bspwm/bspwmrc
 sxhkd /home/robert/.config/sxhkd/sxhkdrc
 lemonbar /home/robert/.config/lemonbar/bar.sh
+env /home/robert/.config/env
