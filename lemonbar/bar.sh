@@ -16,6 +16,15 @@ pkgs(){
     apk version | tail -n +2 |wc -l
     #echo  "$(apk version | wc -l) - 1" |bc
 }
+vpn(){
+    if [ -n "$(ip addr show dev tun0 |grep inet)" ]; then
+
+        vpn_sym=" %{F#A6E22E}"
+    else
+        vpn_sym=" %{F#FF0044}" 
+    fi;
+    echo "$vpn_sym"
+}
 window(){
     xtitle
 }
@@ -38,7 +47,7 @@ mpc_toggle(){
     esac
 }
 while true ; do
-    bar="%{c}%{F#CCCCCC}$(clock)%{l}%{F#AE81FF}$(monitor)%{F#CCCCCC}:%{F#82B414}$(desktop) %{F#66D9Ef}$(window)%{r}%{F#82b414}$(song)  %{F#266C98}%{A:prev:} %{A}%{A:ptoggle:}$(mpc_toggle)%{A}%{A:next:}  %{A}  %{F#Fd971F} %{F#CCCCCC}$(pkgs) %{F#f92672}$(volume)"
+    bar="%{c}%{F#CCCCCC}$(clock)%{l}%{F#AE81FF}$(monitor)%{F#CCCCCC}:%{F#82B414}$(desktop) %{F#66D9Ef}$(window)%{r}%{F#82b414}$(song)  %{F#266C98}%{A:prev:} %{A}%{A:ptoggle:}$(mpc_toggle)%{A}%{A:next:}  %{A}$(vpn)  %{F#Fd971F} %{F#CCCCCC}$(pkgs) %{F#f92672}$(volume)"
     echo "%{S0}$bar%{S1}$bar"
     sleep 1
 done |lemonbar -p -B#1b1d1e -F#cccccc -f "firamono-11" -f 'Font Awesome 5 Free Solid-13'| ~/.config/lemonbar/handle_buttons 
