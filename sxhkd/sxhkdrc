@@ -24,14 +24,14 @@ super + p
 super + shift + q
     bspc node -{c,k}
 
-#restart sxhkd
+#reload sxhkd
 super + alt + s
-    pkill sxhkd && sxhkd
+    pkill -USR1 sxhkd
     
 
 #Kill xorg
 super + Escape
-    killall xinit
+    pkill xinit
 
 #fullscreen
 super + f
