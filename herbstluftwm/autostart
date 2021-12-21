@@ -38,6 +38,10 @@ hc keybind $Mod-j     focus down
 hc keybind $Mod-k     focus up
 hc keybind $Mod-l     focus right
 
+#volume
+hc keybind XF86AudioRaiseVolume spawn sndioctl output.level=+0.02
+hc keybind XF86AudioLowerVolume spawn sndioctl output.level=-0.02
+
 # moving clients in tiling and floating mode
 hc keybind $Mod-Shift-Left  shift left
 hc keybind $Mod-Shift-Down  shift down
@@ -67,17 +71,27 @@ hc keybind $Mod-Control-Up      resize up +$resizestep
 hc keybind $Mod-Control-Right   resize right +$resizestep
 
 # tags
-i=0
 tag_names="1 2 3 4 5 6 7 8 9 0"
 tag_keys="1 2 3 4 5 6 7 8 9 0"
 tag_len=$(echo "$tag_names" | wc -w ) 
-while [ $i -lt $tag_len ]; do
-    name="$(echo "$tag_names" | cut -f$(expr $i + 1) -d' ')"
-    key="$(echo "$tag_keys" | cut -f$(expr $i + 1) -d' ')"
-    hc add "$name"
-    hc keybind $Mod-$key use_index $i
-    hc keybind $Mod-Shift-$key move_index $i
-    i=$( expr $i + 1 )
+ind () {
+echo "$1" | awk "{print \$$2}"
+}
+gen_list() {
+FROM=$1
+TO=$2
+while [ $FROM -le $TO ]; do
+	echo -n $FROM " "
+	FROM=$(expr $FROM + 1)
+done
+}
+hc rename default "$(ind "$tag_names" 1)"  
+for i in $(gen_list 1 $tag_len); do
+	hc add "$(ind "$tag_names" $i)"
+	key="$(ind "$tag_keys" $i)"
+	i=$(expr $i - 1)
+        hc keybind "$Mod-$key" use_index "$i"
+        hc keybind "$Mod-Shift-$key" move_index "$i"
 done
 
 # cycle through tags
@@ -187,3 +201,5 @@ for monitor in $(hc list_monitors | cut -d: -f1) ; do
     # start it on each monitor
     "$panel" "$monitor" &
 done
+
+exec ~/.config/xrc
