@@ -229,7 +229,7 @@ endfunction
 
 " Add your own mapping. For example:
 noremap <silent> <TAB> :call ToggleNetrw()<CR>
-autocmd FileType netrw autocmd WinLeave <buffer> :call CloseNetrw()
+autocmd BufEnter * if (&filetype != "netrw") | call CloseNetrw() | endif
 
 
 
