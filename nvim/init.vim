@@ -20,10 +20,20 @@ augroup END
 call plug#begin('~/.config/nvim/plugged')
 "
 "   " Make sure you use single quotes
+Plug 'neovim/nvim-lspconfig'
+Plug 'hrsh7th/cmp-nvim-lsp'
+Plug 'hrsh7th/cmp-buffer'
+Plug 'hrsh7th/cmp-path'
+Plug 'hrsh7th/cmp-cmdline'
+Plug 'hrsh7th/nvim-cmp'
 
-Plug 'fatih/molokai'
+Plug 'Broccoliraab/molokai'
 
-Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
+Plug 'tpope/vim-surround'
+
+Plug 'drmikehenry/vim-headerguard'
+
+"Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
 
 Plug 'jiangmiao/auto-pairs'
 
@@ -42,8 +52,9 @@ let g:UltiSnipsJumpBackwardTrigger="<c-z>"
 command Cfg edit ~/.config/nvim/init.vim
 
 "=====================================================
-"deoplete
-let g:deoplete#enable_at_startup = 1
+"nvm-cmp
+
+set completeopt=menu,menuone,noselect
 
 "=====================================================
 " Indenting
@@ -176,12 +187,22 @@ vnoremap <up> gk
 
 "=====================================================
 
+" pane switching with CTRL
+
+map <silent> <C-v> <c-w>v
+map <silent> <C-Left> <c-w>h
+map <silent> <C-Down> <c-w>j
+map <silent> <C-Up> <c-w>k
+map <silent> <C-Right> <c-w>l
+
+"=====================================================
+
 " netrw
 "
-let g:netrw_banner = 1
+let g:netrw_banner = 0
 let g:netrw_liststyle = 3
 let g:netrw_browse_split = 4
-let g:netrw_altv = 1
+let g:netrw_v = 0
 let g:netrw_winsize = 25
 
 let g:NetrwIsOpen=0
@@ -204,10 +225,10 @@ endfunction
 
 " Add your own mapping. For example:
 noremap <silent> <TAB> :call ToggleNetrw()<CR>
+autocmd FileType netrw autocmd BufLeave <buffer> :call ToggleNetrw()
 
-"augroup ProjectDrawer
-"  autocmd!
-"
-"  autocmd VimEnter * :Vexplore
-"
-"augroup END
+
+
+luafile ~/.config/nvim/lsp.lua
+luafile ~/.config/nvim/cmp.lua
+
