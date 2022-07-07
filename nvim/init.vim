@@ -202,22 +202,26 @@ map <silent> <C-Right> <c-w>l
 let g:netrw_banner = 0
 let g:netrw_liststyle = 3
 let g:netrw_browse_split = 4
-let g:netrw_v = 0
+let g:netrw_altv = 1
 let g:netrw_winsize = 25
 
 let g:NetrwIsOpen=0
 
+function! CloseNetrw()
+    let i = bufnr("$")
+    while (i >= 1)
+        if (getbufvar(i, "&filetype") == "netrw")
+            silent exe "bwipeout " . i 
+        endif
+        let i-=1
+    endwhile
+    let g:NetrwIsOpen=0
+endfunction
+
 function! ToggleNetrw()
     if g:NetrwIsOpen
-        let i = bufnr("$")
-        while (i >= 1)
-            if (getbufvar(i, "&filetype") == "netrw")
-                silent exe "bwipeout " . i 
-            endif
-            let i-=1
-        endwhile
-        let g:NetrwIsOpen=0
-    else
+            call CloseNetrw()
+            else
         let g:NetrwIsOpen=1
         silent Lexplore
     endif
@@ -225,7 +229,7 @@ endfunction
 
 " Add your own mapping. For example:
 noremap <silent> <TAB> :call ToggleNetrw()<CR>
-autocmd FileType netrw autocmd BufLeave <buffer> :call ToggleNetrw()
+autocmd FileType netrw autocmd WinLeave <buffer> :call CloseNetrw()
 
 
 
