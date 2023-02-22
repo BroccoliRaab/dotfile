@@ -1,3 +1,5 @@
+local lsp_cfg = require('lspconfig')
+
 -- Mappings.
 -- See `:help vim.diagnostic.*` for documentation on any of the below functions
 local opts = { noremap=true, silent=true }
@@ -8,7 +10,7 @@ vim.api.nvim_set_keymap('n', '<space>q', '<cmd>lua vim.diagnostic.setloclist()<C
 
 -- Use an on_attach function to only map the following keys
 -- after the language server attaches to the current buffer
-local on_attach = function(client, bufnr)
+local function on_attach(client, bufnr)
   -- Enable completion triggered by <c-x><c-o>
   vim.api.nvim_buf_set_option(bufnr, 'omnifunc', 'v:lua.vim.lsp.omnifunc')
 
@@ -31,10 +33,12 @@ end
 
 -- Use a loop to conveniently call 'setup' on multiple servers and
 -- map buffer local keybindings when the language server attaches
-local servers = { 'pyright', 'rust_analyzer', 'clangd', 'gdscript' }
-for _, lsp in pairs(servers) do
-  require('lspconfig')[lsp].setup {
+local servers = { 'pyright', 'rust_analyzer', 'clangd', 'openscad_lsp' }
+
+for _, lsp in ipairs(servers) do
+  lsp_cfg[lsp].setup {
     on_attach = on_attach,
+    capabilities = cmp_cfg.capabilities,
     flags = {
       -- This will be the default in neovim 0.7+
       debounce_text_changes = 150,

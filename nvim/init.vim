@@ -20,6 +20,7 @@ augroup END
 call plug#begin('~/.config/nvim/plugged')
 "
 "   " Make sure you use single quotes
+
 Plug 'neovim/nvim-lspconfig'
 Plug 'hrsh7th/cmp-nvim-lsp'
 Plug 'hrsh7th/cmp-buffer'
@@ -33,9 +34,7 @@ Plug 'tpope/vim-surround'
 
 Plug 'drmikehenry/vim-headerguard'
 
-"Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
-
-Plug 'jiangmiao/auto-pairs'
+"Plug 'jiangmiao/auto-pairs'
 
 Plug 'Yggdroot/indentLine'
 
@@ -189,7 +188,6 @@ vnoremap <up> gk
 
 " pane switching with CTRL
 
-map <silent> <C-v> <c-w>v
 map <silent> <C-Left> <c-w>h
 map <silent> <C-Down> <c-w>j
 map <silent> <C-Up> <c-w>k
@@ -233,6 +231,5 @@ autocmd BufEnter * if (&filetype != "netrw") | call CloseNetrw() | endif
 
 
 
-luafile ~/.config/nvim/lsp.lua
 luafile ~/.config/nvim/cmp.lua
-
+luafile ~/.config/nvim/lsp.lua
