@@ -229,7 +229,11 @@ endfunction
 noremap <silent> <TAB> :call ToggleNetrw()<CR>
 autocmd BufEnter * if (&filetype != "netrw") | call CloseNetrw() | endif
 
-
+" ColorColumn
+command CC :call CC80()
+function CC80()
+    let &colorcolumn=join(range(81,999),",")
+endfunction
 
 luafile ~/.config/nvim/cmp.lua
 luafile ~/.config/nvim/lsp.lua
