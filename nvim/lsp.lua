@@ -43,7 +43,7 @@ end
 
 -- Use a loop to conveniently call 'setup' on multiple servers and
 -- map buffer local keybindings when the language server attaches
-local servers = { 'pyright', 'rust_analyzer', 'clangd', 'openscad_lsp' }
+local servers = { 'pyright', 'rust_analyzer', 'clangd', 'openscad_lsp', 'gopls' }
 
 for _, lsp in ipairs(servers) do
   lsp_cfg[lsp].setup {

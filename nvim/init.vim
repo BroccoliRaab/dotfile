@@ -29,6 +29,7 @@ Plug 'hrsh7th/cmp-cmdline'
 Plug 'hrsh7th/nvim-cmp'
 
 Plug 'Broccoliraab/molokai'
+Plug 'sainnhe/sonokai'
 
 Plug 'tpope/vim-surround'
 
@@ -171,7 +172,7 @@ set ttyfast
 syntax on
 "colorscheme raabcolors
 "colorscheme challenger_deep
-colorscheme molokai
+colorscheme sonokai
 "=====================================================
 
 " Wrapping
